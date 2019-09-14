@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="waky",
-    version="0.0.1",
+    version="0.0.2",
     author="Nicolas Landier",
     author_email="nicolas.landier@gmail.com",
     description="Waky is a web application to manage Wake-On-Lan supporting devices",
