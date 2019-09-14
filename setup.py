@@ -8,7 +8,7 @@ setuptools.setup(
     version="0.0.1",
     author="Nicolas Landier",
     author_email="nicolas.landier@gmail.com",
-    description="A small example package",
+    description="Waky is a web application to manage Wake-On-Lan supporting devices",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/landier/waky",
