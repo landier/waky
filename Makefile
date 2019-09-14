@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := all
-.PHONY : all install lint test build upload
+.PHONY : all install lint test build upload clean
 
 all: install run
 
@@ -15,3 +15,6 @@ build:
 
 upload: build
 	pipenv run python -m twine upload dist/*
+
+clean:
+	rm -rf dist/* build/*
