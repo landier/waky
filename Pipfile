@@ -7,7 +7,7 @@ verify_ssl = true
 twine = "*"
 
 [packages]
-sanic = "*"
+waky = {editable = true,path = "."}
 
 [requires]
 python_version = "3.7"

@@ -7,5 +7,8 @@ app = Sanic()
 async def test(request):
     return json({"hello": "world"})
 
-if __name__ == "__main__":
+def main():
     app.run(host="0.0.0.0", port=8000)
+
+if __name__ == "__main__":
+    main()
