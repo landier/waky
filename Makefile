@@ -8,7 +8,7 @@ install:
 	pipenv install --dev
 
 run:
-	pipenv run python main.py
+	WAKY_CONF=waky.conf pipenv run python main.py
 
 build:
 	pipenv run python setup.py sdist bdist_wheel
