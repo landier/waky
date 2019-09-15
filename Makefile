@@ -18,3 +18,6 @@ upload: build
 
 clean:
 	rm -rf dist/* build/*
+
+bumpversion:
+	pipenv run bumpversion patch
