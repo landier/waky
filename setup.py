@@ -14,8 +14,6 @@ setuptools.setup(
     url="https://github.com/landier/waky",
     packages=setuptools.find_packages(),
     install_requires=["sanic"],
-    python_requires='>=3.6',
-    entry_points = {
-        'console_scripts': ['waky=waky.main:main'],
-    }
+    python_requires=">=3.6",
+    entry_points={"console_scripts": ["waky=waky.main:main"]},
 )
