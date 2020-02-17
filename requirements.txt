@@ -1,5 +1,5 @@
 black
 flake8
-isort
+isort[requirements]
 pre-commit
 twine
