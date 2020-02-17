@@ -6,6 +6,8 @@ Waky is a web application to manage Wake-On-Lan supporting devices
 # Local dev
 ```
 tox -e dev
+WAKY_CONF=waky.conf
+env/bin/waky
 ```
 
 # Testing
