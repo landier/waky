@@ -13,7 +13,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/landier/waky",
     packages=setuptools.find_packages(),
-    install_requires=["sanic"],
+    install_requires=["ping3", "sanic"],
     python_requires=">=3.6",
     entry_points={"console_scripts": ["waky=waky.main:main"]},
 )
