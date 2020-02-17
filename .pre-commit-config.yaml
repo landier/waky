@@ -1,9 +1,13 @@
 repos:
-  - repo: https://gitlab.com/pycqa/flake8
+  - repo: https://github.com/pre-commit/mirrors-isort
     rev: master
     hooks:
-    - id: flake8
+    - id: isort
   - repo: https://github.com/ambv/black
     rev: stable
     hooks:
     - id: black
+  - repo: https://gitlab.com/pycqa/flake8
+    rev: master
+    hooks:
+    - id: flake8
