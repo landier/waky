@@ -1,12 +1,13 @@
-import os
-from sanic import Sanic
-from sanic.response import json, text
-from sanic.response import stream
-from ping3 import ping
 import asyncio
+import os
 
+from ping3 import ping
+from sanic import Sanic
+from sanic.response import json, stream, text
+from sanic_brogz import Compress
 
 app = Sanic("waky")
+Compress(app)
 
 
 @app.route("/")
@@ -23,10 +24,10 @@ async def hosts(request):
 async def ping_handler(request, host):
     async def ping_streaming_fn(response):
         while True:
-            await response.write(str(round(ping(host, unit='ms'), 3))+"\n")
+            await response.write(str(round(ping(host, unit="ms"), 3)) + "\n")
             await asyncio.sleep(1)
 
-    return stream(ping_streaming_fn, content_type='text', chunked=True)
+    return stream(ping_streaming_fn, content_type="text", chunked=True)
 
 
 def main():
