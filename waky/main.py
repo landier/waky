@@ -27,7 +27,7 @@ async def ping_handler(request, host):
             await response.write(str(round(ping(host, unit="ms"), 3)) + "\n")
             await asyncio.sleep(1)
 
-    return stream(ping_streaming_fn, content_type="text", chunked=True)
+    return stream(ping_streaming_fn, content_type="text/plain; charset=utf-8", chunked=True)
 
 
 def main():
