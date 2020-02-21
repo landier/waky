@@ -4,10 +4,8 @@ import os
 from ping3 import ping
 from sanic import Sanic
 from sanic.response import json, stream, text
-from sanic_brogz import Compress
 
 app = Sanic("waky")
-Compress(app)
 
 
 @app.route("/")
