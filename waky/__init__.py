@@ -1,1 +1,1 @@
-name = "sanic"
+name = "waky"

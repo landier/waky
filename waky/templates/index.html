@@ -1,0 +1,10 @@
+{% extends "base.html" %} {% block content %}
+<div class="jumbotron">
+    <h1 class="display-4">{{greeting}}</h1>
+    <p class="lead">This is a simple demo using Sanic, Jinja2, and Bootstrap</p>
+    <hr class="my-4">
+    <p class="lead">
+        <a class="btn btn-primary btn-lg" href={{button}} role="button" target="_blank">Learn more</a>
+    </p>
+</div>
+{% endblock %}

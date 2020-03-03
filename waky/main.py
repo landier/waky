@@ -1,16 +1,27 @@
 import asyncio
 import os
 
+from jinja2 import Environment, PackageLoader, select_autoescape
 from ping3 import ping
 from sanic import Sanic
-from sanic.response import json, stream, text
+from sanic.response import html, stream, text
+
+# define the environment for the Jinja2 templates
+env = Environment(loader=PackageLoader("waky", "templates"), autoescape=select_autoescape(["html", "xml", "tpl"]))
+
+
+# a function for loading an HTML template from the Jinja environment
+def template(tpl, **kwargs):
+    template = env.get_template(tpl)
+    return html(template.render(kwargs))
+
 
 app = Sanic("waky")
 
 
 @app.route("/")
 async def index(request):
-    return json({"hello": "world"})
+    return template("index.html", title="Sanic Website - Demo", greeting="greeting", button="link")
 
 
 @app.route("/hosts")
