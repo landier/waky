@@ -1,2 +1,21 @@
 {% extends "base.html" %} {% block content %}
+<table>
+    <caption>Devices</caption>
+    <thead>
+      <tr>
+        <th>Hostname</th>
+        <th>IP</th>
+        <th>Last seen</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for device in devices %}
+      <tr>
+        <td data-label="Hostname">{% if device.status == 'up' %}<button class="tertiary">{% else %}<button class="secondary">{% endif %}{{ device.hostname }}</button></td>
+        <td data-label="IP">{{ device.ip }}</td>
+        <td data-label="Last seen"></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 {% endblock %}
