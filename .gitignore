@@ -1,5 +1,11 @@
-# Created by https://www.gitignore.io/api/python,visualstudiocode
-# Edit at https://www.gitignore.io/?templates=python,visualstudiocode
+# Created by https://www.gitignore.io/api/bower,python,visualstudiocode
+# Edit at https://www.gitignore.io/?templates=bower,python,visualstudiocode
+
+### Bower ###
+static/thirdparty/
+.bower-cache
+.bower-registry
+.bower-tmp
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
@@ -117,6 +123,6 @@ dmypy.json
 # Ignore all local history of files
 .history
 
-# End of https://www.gitignore.io/api/python,visualstudiocode
+# End of https://www.gitignore.io/api/bower,python,visualstudiocode
 
 env/*

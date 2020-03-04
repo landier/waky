@@ -3,6 +3,10 @@
 # Waky
 Waky is a web application to manage Wake-On-Lan supporting devices
 
+## Requirements
+* Python 3
+* Bower
+
 # Local dev
 ```
 docker run -it --rm -v $PWD:/workspace -w /workspace ubuntu /bin/bash

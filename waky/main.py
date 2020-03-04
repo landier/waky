@@ -17,6 +17,7 @@ def template(tpl, **kwargs):
 
 
 app = Sanic("waky")
+app.static("/static", "./static")
 
 
 @app.route("/")

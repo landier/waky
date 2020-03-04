@@ -1,0 +1,22 @@
+{
+  "name": "waky",
+  "homepage": "https://github.com/landier/waky",
+  "authors": [
+    "Nicolas Landier <nicolas.landier@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "static/thirdparty/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "mini.css": "^3.0.1"
+  }
+}
