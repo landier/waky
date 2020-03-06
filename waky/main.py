@@ -19,7 +19,6 @@ def template(tpl, **kwargs):
 
 app = Sanic("waky")
 app.static("/static", "./static")
-app.static("/favicon.ico", "./static/thirdparty/simple-icons/icons/wattpad.svg")
 
 
 @app.route("/")
