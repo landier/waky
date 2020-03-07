@@ -10,6 +10,21 @@ logging.basicConfig(level=logging.DEBUG, format=FORMAT)
 logger = logging.getLogger("device")
 
 
+class DeviceRefresher(threading.Thread):
+    def __init__(self, device):
+        self.device = device
+        super().__init__()
+
+    def run(self):
+        try:
+            ip = socket.gethostbyname(self.device.hostname)
+            last_ping = ping(self.device.hostname, unit="ms", timeout=5)
+        except socket.gaierror:
+            logger.debug(f"Unknown host: {self.device.hostname}", extra={"id": threading.get_ident()})
+        logger.debug(f"{ip} - {last_ping}", extra={"id": threading.get_ident()})
+        self.device.refresh_callback(ip, last_ping)
+
+
 class Device:
     def __init__(self, hostname):
         self.hostname = hostname
@@ -20,18 +35,18 @@ class Device:
         self.refresh()
 
     def refresh(self):
-        try:
-            self.ip = socket.gethostbyname(self.hostname)
-            self.last_ping = ping(self.hostname, unit="ms", timeout=5)
-            if self.last_ping is None:
-                self.status = "down"
-            else:
-                self.status = "up"
-        except socket.gaierror:
-            logger.debug(f"Unknown host: {self.hostname}", extra={"id": threading.get_ident()})
+        refresher = DeviceRefresher(self)
+        refresher.start()
+
+    def refresh_callback(self, ip, last_ping):
+        self.ip = ip
+        self.last_ping = last_ping
+        if last_ping is None:
             self.status = "down"
+        else:
+            self.status = "up"
         self.last_check = datetime.now()
-        logger.debug(self, extra={"id": threading.get_ident()})
+        logger.debug(f"callback - {self.ip} - {self.last_ping}", extra={"id": threading.get_ident()})
 
     def __repr__(self):
         return str(vars(self))
@@ -39,4 +54,8 @@ class Device:
 
 if __name__ == "__main__":
     rpi01 = Device("rpi01")
+    import time
+
+    print(rpi01)
+    time.sleep(2)
     print(rpi01)
