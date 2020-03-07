@@ -1,4 +1,4 @@
 devices = [
     "rpi01",
-    #    'rpi02',
+    "rpi02",
 ]

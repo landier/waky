@@ -5,6 +5,7 @@ from jinja2 import Environment, PackageLoader, select_autoescape
 from ping3 import ping
 from sanic import Sanic
 from sanic.response import html, stream, text
+from waky.inventory import Inventory
 from waky.settings import devices
 
 # define the environment for the Jinja2 templates
@@ -19,11 +20,14 @@ def template(tpl, **kwargs):
 
 app = Sanic("waky")
 app.static("/static", "./static")
+inventory = Inventory()
+inventory.load(devices)
+inventory.run()
 
 
 @app.route("/")
 async def index(request):
-    return template("index.html", title="Waky", devices=devices.values())
+    return template("index.html", title="Waky", devices=inventory.devices.values())
 
 
 @app.route("/hosts")
