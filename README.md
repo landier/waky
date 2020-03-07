@@ -41,3 +41,4 @@ docker run -it --rm -p 8888:8888 waky:latest
 
 # Resources
 * [favicon.io](https://favicon.io/favicon-generator/?t=W&ff=Righteous&fs=180&fc=%23000&b=rounded&bc=transparent)
+* [Righteous font](https://fonts.google.com/specimen/Righteous)
