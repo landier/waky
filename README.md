@@ -40,4 +40,4 @@ docker run -it --rm -p 8888:8888 waky:latest
 * PyPI publishing
 
 # Resources
-* [favicon.io](https://favicon.io/favicon-generator/?t=W&ff=Monoton&fs=135&fc=%23000&b=rounded&bc=transparent)
+* [favicon.io](https://favicon.io/favicon-generator/?t=W&ff=Righteous&fs=180&fc=%23000&b=rounded&bc=transparent)
