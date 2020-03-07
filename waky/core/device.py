@@ -5,10 +5,10 @@ from threading import RLock, Thread
 
 from ping3 import ping
 
-log_format = "%(asctime)-15s [%(process)d] - %(levelname)s - %(threadName)s - %(hostname)s - %(message)s"
+log_format = "%(asctime)-15s [%(process)d] [%(levelname)s] %(threadName)s %(message)s"
 datefmt = "[%Y-%m-%d %H:%M:%S %z]"
 logging.basicConfig(level=logging.DEBUG, format=log_format, datefmt=datefmt)
-logger = logging.getLogger("device")
+logger = logging.getLogger("waky.core.device")
 
 
 class Device:
@@ -25,12 +25,12 @@ class Device:
                 self.ip = socket.gethostbyname(self.hostname)
                 self.last_ping = ping(self.hostname, unit="ms", timeout=5)
             except socket.gaierror:
-                logger.debug(f"Unknown host", extra={"hostname": self.hostname})
+                logger.debug(f"Unknown host")
             finally:
                 self.last_check = datetime.now()
-                logger.debug(f"Refresh done", extra={"hostname": self.hostname})
+                logger.debug(f"Refresh done")
 
-        logger.debug(f"Start refresh", extra={"hostname": self.hostname})
+        logger.debug(f"Start refresh")
         Thread(target=refresh_thread_function).start()
 
     @property
@@ -39,9 +39,9 @@ class Device:
 
     @ip.setter
     def ip(self, value):
-        logger.debug(f"Updating ip before lock", extra={"hostname": self.hostname})
+        logger.debug(f"Updating ip before lock")
         with RLock():
-            logger.debug(f"Updating ip", extra={"hostname": self.hostname})
+            logger.debug(f"Updating ip")
             self._ip = value
 
     @property
@@ -50,9 +50,9 @@ class Device:
 
     @last_ping.setter
     def last_ping(self, value):
-        logger.debug(f"Updating ping before lock", extra={"hostname": self.hostname})
+        logger.debug(f"Updating ping before lock")
         with RLock():
-            logger.debug(f"Updating ping", extra={"hostname": self.hostname})
+            logger.debug(f"Updating ping")
             self._last_ping = value
 
     @property
