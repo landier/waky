@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from threading import Timer
 
-from waky.device import Device
+from waky.core.device import Device
 
 
 class Inventory:

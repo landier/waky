@@ -5,7 +5,7 @@ from jinja2 import Environment, PackageLoader, select_autoescape
 from ping3 import ping
 from sanic import Sanic
 from sanic.response import html, stream, text
-from waky.inventory import Inventory
+from waky.core.inventory import Inventory
 from waky.settings import devices
 
 # define the environment for the Jinja2 templates

@@ -1,12 +1,13 @@
 import logging
 import socket
 from datetime import datetime
-from threading import RLock, Thread, get_ident
+from threading import RLock, Thread
 
 from ping3 import ping
 
-log_format = "%(asctime)-15s - %(levelname)s - %(thread_id)s - %(hostname)s - %(message)s"
-logging.basicConfig(level=logging.DEBUG, format=log_format)
+log_format = "%(asctime)-15s [%(process)d] - %(levelname)s - %(threadName)s - %(hostname)s - %(message)s"
+datefmt = "[%Y-%m-%d %H:%M:%S %z]"
+logging.basicConfig(level=logging.DEBUG, format=log_format, datefmt=datefmt)
 logger = logging.getLogger("device")
 
 
@@ -24,12 +25,12 @@ class Device:
                 self.ip = socket.gethostbyname(self.hostname)
                 self.last_ping = ping(self.hostname, unit="ms", timeout=5)
             except socket.gaierror:
-                logger.debug(f"Unknown host", extra={"thread_id": get_ident(), "hostname": self.hostname})
+                logger.debug(f"Unknown host", extra={"hostname": self.hostname})
             finally:
                 self.last_check = datetime.now()
-                logger.debug(f"Refresh done", extra={"thread_id": get_ident(), "hostname": self.hostname})
+                logger.debug(f"Refresh done", extra={"hostname": self.hostname})
 
-        logger.debug(f"Start refresh", extra={"thread_id": get_ident(), "hostname": self.hostname})
+        logger.debug(f"Start refresh", extra={"hostname": self.hostname})
         Thread(target=refresh_thread_function).start()
 
     @property
@@ -38,9 +39,9 @@ class Device:
 
     @ip.setter
     def ip(self, value):
-        logger.debug(f"Updating ip before lock", extra={"thread_id": get_ident(), "hostname": self.hostname})
+        logger.debug(f"Updating ip before lock", extra={"hostname": self.hostname})
         with RLock():
-            logger.debug(f"Updating ip", extra={"thread_id": get_ident(), "hostname": self.hostname})
+            logger.debug(f"Updating ip", extra={"hostname": self.hostname})
             self._ip = value
 
     @property
@@ -49,9 +50,9 @@ class Device:
 
     @last_ping.setter
     def last_ping(self, value):
-        logger.debug(f"Updating ping before lock", extra={"thread_id": get_ident(), "hostname": self.hostname})
+        logger.debug(f"Updating ping before lock", extra={"hostname": self.hostname})
         with RLock():
-            logger.debug(f"Updating ping", extra={"thread_id": get_ident(), "hostname": self.hostname})
+            logger.debug(f"Updating ping", extra={"hostname": self.hostname})
             self._last_ping = value
 
     @property
@@ -70,7 +71,7 @@ if __name__ == "__main__":
 
     rpi01 = Device("rpi01")
     rpi02 = Device("rpi02")
-    logger.info(rpi01, extra={"thread_id": get_ident(), "hostname": rpi01.hostname})
+    logger.info(rpi01, extra={"hostname": rpi01.hostname})
     time.sleep(2)
-    logger.info(rpi01, extra={"thread_id": get_ident(), "hostname": rpi01.hostname})
-    logger.info(rpi02, extra={"thread_id": get_ident(), "hostname": rpi02.hostname})
+    logger.info(rpi01, extra={"hostname": rpi01.hostname})
+    logger.info(rpi02, extra={"hostname": rpi02.hostname})
