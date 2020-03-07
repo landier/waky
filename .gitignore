@@ -153,4 +153,4 @@ dmypy.json
 
 # End of https://www.gitignore.io/api/bower,macos,python,visualstudiocode
 
-env/*
+env/
