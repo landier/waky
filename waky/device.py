@@ -16,7 +16,7 @@ class Device:
         self.ip = None
         self.last_ping = None
         self.last_check = None
-        self.refresh()
+        # self.refresh()
 
     def refresh(self):
         def refresh_thread_function():

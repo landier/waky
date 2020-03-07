@@ -1,3 +1,6 @@
+from datetime import datetime, timedelta
+from threading import Timer
+
 from waky.device import Device
 from waky.settings import devices
 
@@ -5,7 +8,17 @@ from waky.settings import devices
 class Inventory:
     def __init__(self):
         self.devices = {}
-        pass
+
+    def run(self):
+        def refresh_devices():
+            timer_thread = Timer(5.0, refresh_devices)
+            timer_thread.daemon = True
+            timer_thread.start()
+            for device in self.devices.values():
+                if device.last_check is None or datetime.now() < device.last_check + timedelta(seconds=10):
+                    device.refresh()
+
+        refresh_devices()
 
     def load(self, host_list):
         for host in host_list:
@@ -18,4 +31,5 @@ class Inventory:
 if __name__ == "__main__":
     inventory = Inventory()
     inventory.load(devices)
+    inventory.run()
     print(inventory)
