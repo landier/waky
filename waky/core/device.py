@@ -3,8 +3,8 @@ import socket
 from datetime import datetime
 from threading import RLock, Thread
 
+import humanize
 from ping3 import ping
-
 
 logger = logging.getLogger(__name__)
 
@@ -30,6 +30,10 @@ class Device:
 
         logger.debug(f"Start refresh")
         Thread(target=refresh_thread_function).start()
+
+    @property
+    def human_last_check(self):
+        return humanize.naturaltime(self.last_check)
 
     @property
     def ip(self):
