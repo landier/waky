@@ -16,9 +16,6 @@ class Inventory:
     def run(self):
         def refresh_devices():
             logger.debug("Refresh devices")
-            timer_thread = Timer(5.0, refresh_devices)
-            timer_thread.daemon = True
-            timer_thread.start()
             for device_key, device in self.devices.items():
                 if device.last_check is None or datetime.now() - device.last_check >= timedelta(seconds=15):
                     logger.debug(f"Out of date device, refreshing: {device_key}")
@@ -26,6 +23,9 @@ class Inventory:
                     delay = random.uniform(0.5, 2.5)
                     logger.debug(f"Insert delay: {delay}")
                     time.sleep(delay)
+            timer_thread = Timer(5.0, refresh_devices)
+            timer_thread.daemon = True
+            timer_thread.start()
 
         refresh_devices()
 
