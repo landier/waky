@@ -47,7 +47,7 @@ class Device:
         if self.last_ping_ms is None:
             return "∞"
         else:
-            return f"{round(self.last_ping_ms, 0)} ms"
+            return f"{int(self.last_ping_ms)} ms"
 
     @property
     def ip(self):
