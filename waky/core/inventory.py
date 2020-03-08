@@ -1,8 +1,10 @@
+import logging
+import random
+import time
 from datetime import datetime, timedelta
 from threading import Timer
-import logging
-from waky.core.device import Device
 
+from waky.core.device import Device
 
 logger = logging.getLogger(__name__)
 
@@ -13,14 +15,17 @@ class Inventory:
 
     def run(self):
         def refresh_devices():
-            timer_thread = Timer(15.0, refresh_devices)
             logger.debug("Refresh devices")
+            timer_thread = Timer(5.0, refresh_devices)
             timer_thread.daemon = True
             timer_thread.start()
             for device_key, device in self.devices.items():
-                if device.last_check is None or datetime.now() < device.last_check + timedelta(seconds=10):
+                if device.last_check is None or datetime.now() - device.last_check >= timedelta(seconds=15):
                     logger.debug(f"Out of date device, refreshing: {device_key}")
                     device.refresh()
+                    delay = random.uniform(0.5, 2.5)
+                    logger.debug(f"Insert delay: {delay}")
+                    time.sleep(delay)
 
         refresh_devices()
 
