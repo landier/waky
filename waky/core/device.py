@@ -5,10 +5,8 @@ from threading import RLock, Thread
 
 from ping3 import ping
 
-log_format = "%(asctime)-15s [%(process)d] [%(levelname)s] %(threadName)s %(message)s"
-datefmt = "[%Y-%m-%d %H:%M:%S %z]"
-logging.basicConfig(level=logging.DEBUG, format=log_format, datefmt=datefmt)
-logger = logging.getLogger("waky.core.device")
+
+logger = logging.getLogger(__name__)
 
 
 class Device:
