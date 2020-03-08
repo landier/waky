@@ -13,7 +13,7 @@ class Device:
     def __init__(self, hostname):
         self.hostname = hostname
         self.ip = None
-        self.last_ping = None
+        self.last_ping_ms = None
         self.last_check = None
         self.refresh()
 
@@ -21,7 +21,7 @@ class Device:
         def refresh_thread_function():
             try:
                 self.ip = socket.gethostbyname(self.hostname)
-                self.last_ping = ping(self.hostname, unit="ms", timeout=5)
+                self.last_ping_ms = ping(self.hostname, unit="ms", timeout=5)
             except socket.gaierror:
                 logger.debug(f"Unknown host")
             finally:
@@ -32,8 +32,22 @@ class Device:
         Thread(target=refresh_thread_function).start()
 
     @property
+    def human_ip(self):
+        if self.ip is None:
+            return "N/A"
+        else:
+            return self.ip
+
+    @property
     def human_last_check(self):
         return humanize.naturaltime(self.last_check)
+
+    @property
+    def human_last_ping_ms(self):
+        if self.last_ping_ms is None:
+            return "∞"
+        else:
+            return f"{round(self.last_ping_ms, 3)} ms"
 
     @property
     def ip(self):
@@ -47,19 +61,19 @@ class Device:
             self._ip = value
 
     @property
-    def last_ping(self):
-        return self._last_ping
+    def last_ping_ms(self):
+        return self._last_ping_ms
 
-    @last_ping.setter
-    def last_ping(self, value):
+    @last_ping_ms.setter
+    def last_ping_ms(self, value):
         logger.debug(f"Updating ping before lock")
         with RLock():
             logger.debug(f"Updating ping")
-            self._last_ping = value
+            self._last_ping_ms = value
 
     @property
     def status(self):
-        if self.last_ping is not None:
+        if self.last_ping_ms is not None:
             return "up"
         else:
             return "down"

@@ -13,8 +13,8 @@
     {% for device in devices %}
       <tr>
         <td data-label="Hostname">{% if device.status == 'up' %}<button class="tertiary">{% else %}<button class="secondary">{% endif %}{{ device.hostname }}</button></td>
-        <td data-label="IP">{{ device.ip }}</td>
-        <td data-label="Ping">{{ device.last_ping }}</td>
+        <td data-label="IP">{{ device.human_ip }}</td>
+        <td data-label="Ping">{{ device.human_last_ping_ms }}</td>
         <td data-label="Last check">{{ device.human_last_check }}</td>
       </tr>
       {% endfor %}
