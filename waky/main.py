@@ -1,18 +1,34 @@
 import asyncio
 import os
 
+from jinja2 import Environment, PackageLoader, select_autoescape
 from ping3 import ping
 from sanic import Sanic
-from sanic.response import json, stream, text
-from sanic_brogz import Compress
+from sanic.response import html, stream, text
+from waky.core.inventory import Inventory
+from waky.settings import devices
+
+# define the environment for the Jinja2 templates
+env = Environment(loader=PackageLoader("waky", "templates"), autoescape=select_autoescape(["html", "xml", "tpl"]))
+
+
+# a function for loading an HTML template from the Jinja environment
+def template(tpl, **kwargs):
+    template = env.get_template(tpl)
+    return html(template.render(kwargs))
+
 
 app = Sanic("waky")
-Compress(app)
+app.static("/static", "./static")
+inventory = Inventory()
+inventory.load(devices)
+inventory.run()
 
 
 @app.route("/")
 async def index(request):
-    return json({"hello": "world"})
+    return template("index.html", title="Waky", devices=inventory.devices.values())
+
 
 
 @app.route("/hosts")
@@ -27,7 +43,7 @@ async def ping_handler(request, host):
             await response.write(str(round(ping(host, unit="ms"), 3)) + "\n")
             await asyncio.sleep(1)
 
-    return stream(ping_streaming_fn, content_type="text", chunked=True)
+    return stream(ping_streaming_fn, content_type="text/plain; charset=utf-8", chunked=True)
 
 
 def main():

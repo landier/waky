@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="waky",
-    version="0.0.2",
+    version="0.1.0",
     author="Nicolas Landier",
     author_email="nicolas.landier@gmail.com",
     description="Waky is a web application to manage Wake-On-Lan supporting devices",
@@ -13,7 +13,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/landier/waky",
     packages=setuptools.find_packages(),
-    install_requires=["ping3", "sanic", "sanic_brogz"],
+    install_requires=["humanize", "jinja2", "ping3", "sanic"],
     python_requires=">=3.6",
     entry_points={"console_scripts": ["waky=waky.main:main"]},
 )
