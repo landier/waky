@@ -5,6 +5,7 @@
       <tr>
         <th>Hostname</th>
         <th>IP</th>
+        <th>MAC</th>
         <th>Ping</th>
         <th>Last check</th>
       </tr>
@@ -14,6 +15,7 @@
       <tr>
         <td data-label="Hostname">{% if device.status == 'up' %}<button class="tertiary">{% else %}<button class="secondary">{% endif %}{{ device.hostname }}</button></td>
         <td data-label="IP">{{ device.human_ip }}</td>
+        <td data-label="MAC">{{ device.human_mac }}</td>
         <td data-label="Ping">{{ device.human_last_ping_ms }}</td>
         <td data-label="Last check">{{ device.human_last_check }}</td>
       </tr>
