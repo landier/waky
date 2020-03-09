@@ -30,6 +30,7 @@ async def index(request):
     return template("index.html", title="Waky", devices=inventory.devices.values())
 
 
+
 @app.route("/hosts")
 async def hosts(request):
     return text(app.config.HOSTS)
