@@ -18,8 +18,10 @@ def template(tpl, **kwargs):
     return html(template.render(kwargs))
 
 
+app_home = os.path.dirname(__file__)
+
 app = Sanic("waky")
-app.static("/static", "./static")
+app.static("/static", app_home + "/static")
 inventory = Inventory()
 inventory.load(devices)
 inventory.run()
@@ -28,7 +30,6 @@ inventory.run()
 @app.route("/")
 async def index(request):
     return template("index.html", title="Waky", devices=inventory.devices.values())
-
 
 
 @app.route("/hosts")
