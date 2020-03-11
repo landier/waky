@@ -31,6 +31,11 @@ tox -e run
 bumpversion minor
 ```
 
+## Build
+```
+tox -e build
+```
+
 ## Build & Publish to PyPI
 ```
 tox -e upload
