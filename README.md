@@ -6,6 +6,7 @@ Waky is a web application to manage Wake-On-Lan supporting devices
 ## Requirements
 * Python 3
 * Bower
+* tox
 
 # Local dev
 ```
@@ -20,24 +21,25 @@ env/bin/waky
 tox
 ```
 
-# Deploy using Docker
-## Build
-```
-docker build -f docker/Dockerfile -t waky .
-```
-
 ## Run
 ```
-docker run -it --rm -p 8888:8888 waky:latest
+tox -e run
 ```
 
-# To do
-* Web server
-* Wake up feature
-* Healthcheck feature
-* Suspend feature
-* Telegram integration
-* PyPI publishing
+## Release
+```
+bumpversion minor
+```
+
+## Build
+```
+tox -e build
+```
+
+## Build & Publish to PyPI
+```
+tox -e upload
+```
 
 # Resources
 * [favicon.io](https://favicon.io/favicon-generator/?t=W&ff=Righteous&fs=180&fc=%23000&b=rounded&bc=transparent)
