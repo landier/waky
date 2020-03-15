@@ -26,3 +26,8 @@ jobs:
       env:
         PYPI_TOKEN: ${{ secrets.PYPI_PASSWORD }}
       run: tox -e upload
+    - name: Upload packages
+      uses: actions/upload-artifact@v1
+      with:
+        name: dist
+        path: dist

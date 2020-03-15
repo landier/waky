@@ -6,15 +6,17 @@ from threading import RLock, Thread
 import humanize
 from getmac import get_mac_address
 from ping3 import ping
+from waky.logging_config import configure_logging
 
+configure_logging()
 logger = logging.getLogger(__name__)
 
 
 class Device:
-    def __init__(self, hostname):
+    def __init__(self, hostname, mac=None):
         self.hostname = hostname
         self.ip = None
-        self.mac = None
+        self.mac = mac
         self.last_ping_ms = None
         self.last_check = None
         self.refresh()
