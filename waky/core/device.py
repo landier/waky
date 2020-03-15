@@ -28,7 +28,9 @@ class Device:
                 self.mac = get_mac_address(hostname=self.hostname)
                 self.last_ping_ms = ping(self.hostname, unit="ms", timeout=5)
             except socket.gaierror:
-                logger.debug(f"Unknown host")
+                logger.info(f"Unknown host: {self.hostname}")
+            except PermissionError:
+                logger.error(f"Ping not permitted")
             finally:
                 self.last_check = datetime.now()
                 logger.debug(f"Refresh done")
