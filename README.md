@@ -28,7 +28,7 @@ tox -e run
 
 ## Release
 ```
-bumpversion minor
+bump2version minor
 ```
 
 ## Build
