@@ -51,12 +51,7 @@ async def ping_handler(request, host):
 
 
 def main():
-    if "WAKY_CONF" in os.environ:
-        app.config.from_envvar("WAKY_CONF")
-    debug = app.config.get("DEBUG", False)
-    listening = app.config.get("LISTENING", "0.0.0.0")
-    port = app.config.get("PORT", 8888)
-    app.run(host=listening, port=port, debug=debug)
+    app.run(host=config.listen, port=config.port, debug=config.debug)
 
 
 if __name__ == "__main__":
