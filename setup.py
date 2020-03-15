@@ -3,9 +3,13 @@ import setuptools
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
+version = {}
+with open("waky/__init__.py", "r") as fp:
+    exec(fp.read(), version)
+
 setuptools.setup(
     name="waky",
-    version="0.2.0",
+    version=version["__version__"],
     author="Nicolas Landier",
     author_email="nicolas.landier@gmail.com",
     description="Waky is a web application to manage Wake-On-Lan supporting devices",
