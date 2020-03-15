@@ -5,8 +5,11 @@ from jinja2 import Environment, PackageLoader, select_autoescape
 from ping3 import ping
 from sanic import Sanic
 from sanic.response import html, stream, text
+from waky.conf import Config
 from waky.core.inventory import Inventory
-from waky.settings import devices
+from waky.logging_config import configure_logging
+
+configure_logging()
 
 # define the environment for the Jinja2 templates
 env = Environment(loader=PackageLoader("waky", "templates"), autoescape=select_autoescape(["html", "xml", "tpl"]))
@@ -18,12 +21,12 @@ def template(tpl, **kwargs):
     return html(template.render(kwargs))
 
 
-app_home = os.path.dirname(__file__)
-
+config = Config()
+app_home = os.path.dirname(os.path.abspath(__file__))
 app = Sanic("waky")
 app.static("/static", app_home + "/static")
 inventory = Inventory()
-inventory.load(devices)
+inventory.load(config.devices)
 inventory.run()
 
 

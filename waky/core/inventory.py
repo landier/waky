@@ -5,7 +5,9 @@ from datetime import datetime, timedelta
 from threading import Timer
 
 from waky.core.device import Device
+from waky.logging_config import configure_logging
 
+configure_logging()
 logger = logging.getLogger(__name__)
 
 DEVICE_CHECK_PERIOD_IN_S = 60
@@ -33,15 +35,15 @@ class Inventory:
         refresh_devices()
 
     def load(self, host_list):
-        for host in host_list:
-            self.devices[host] = Device(host)
+        for host, mac in host_list.items():
+            self.devices[host] = Device(host, mac)
 
     def __repr__(self):
-        return str(vars(inventory))
+        return str(vars(self))
 
 
 if __name__ == "__main__":
-    from waky.settings import devices
+    devices = {"localhost": "", "rpi01": ""}
 
     inventory = Inventory()
     inventory.load(devices)
