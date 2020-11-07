@@ -5,4 +5,10 @@
 poetry install
 poetry run uvicorn waky.main:app --reload
 ```
-git
+
+## Dev
+```bash
+cd waky
+pre-commit install
+poetry install
+```
