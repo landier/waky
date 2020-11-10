@@ -1,9 +1,11 @@
 # waky
+_Waky is a web application to manage Wake-On-Lan supporting devices._
 
-## Requisites
+## Requirements
 * make
 * [poetry](https://python-poetry.org/)
 * [pre-commit](https://pre-commit.com/)
+* Python 3.8
 
 ## Quickstart
 ```bash
