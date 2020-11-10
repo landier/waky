@@ -11,4 +11,4 @@ prod-install:
 	poetry install --no-dev
 
 prod: prod-install
-	poetry run uvicorn waky.main:app --host 0.0.0.0 --port 8000
+	poetry run gunicorn -w 2 -k uvicorn.workers.UvicornWorker --log-level warning waky.main:app --bind 0.0.0.0:8000
