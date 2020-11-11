@@ -1,6 +1,0 @@
-black
-bump2version
-flake8
-isort[requirements]
-pre-commit
-twine
