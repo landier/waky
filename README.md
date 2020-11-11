@@ -1,5 +1,10 @@
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/landier/waky/CI?style=for-the-badge)
-![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/github/landier/waky?style=for-the-badge)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/landier/waky/CI?style=flat-square)
+![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/github/landier/waky?style=flat-square)
+![LGTM Grade](https://img.shields.io/lgtm/grade/python/github/landier/waky?style=flat-square)
+![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/landier/waky?style=flat-square)
+![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/landier/waky?style=flat-square)
+![PyPI](https://img.shields.io/pypi/v/waky?style=flat-square)
+
 
 # waky
 _Waky is a web application to manage Wake-On-Lan supporting devices._
