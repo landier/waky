@@ -1,3 +1,5 @@
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/landier/waky/CI?style=for-the-badge)
+
 # waky
 _Waky is a web application to manage Wake-On-Lan supporting devices._
 
